@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixly - Pixel Art Creator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <h1>Pixly</h1>
+        <p>Create Your Pixel Art</p>
+    </header>
+    <div class="container">
+        <div class="controls">
+            <div class="controls-inner">
+                <label for="grid-size">Grid (max 100):</label>
+                <input type="number" id="grid-size" min="1" max="100" value="16">
+                <button class="pixel-btn" id="grid-16" title="Set grid to 16x16">16x16</button>
+                <button class="pixel-btn" id="grid-32" title="Set grid to 32x32">32x32</button>
+                <button class="pixel-btn" id="grid-64" title="Set grid to 64x64">64x64</button>
+                <button class="pixel-btn" id="reset-grid" title="Reset grid to white">Reset</button>
+                <input type="color" id="color-picker" title="Pick a color">
+                <label for="brush-size">Brush Size:</label>
+                <select id="brush-size">
+                    <option value="1">1x1</option>
+                    <option value="2">2x2</option>
+                    <option value="3">3x3</option>
+                </select>
+                <button class="pixel-btn" id="pencil" title="Draw with selected color">Pen</button>
+                <button class="pixel-btn" id="fill" title="Fill area with selected color">Fill</button>
+                <button class="pixel-btn" id="eraser" title="Erase pixels (set to white)">Erase</button>
+                <button class="pixel-btn" id="undo" title="Undo last action">Undo</button>
+                <button class="pixel-btn" id="redo" title="Redo undone action">Redo</button>
+                <button class="pixel-btn zoom-btn" id="zoom-in" title="Zoom in (up to 4x)">+</button>
+                <button class="pixel-btn zoom-btn" id="zoom-out" title="Zoom out (down to 1x)">-</button>
+                <button class="pixel-btn" id="save-project" title="Save project as JSON">Save</button>
+                <input type="file" id="load-project" accept=".json" style="display: none;">
+                <button class="pixel-btn" id="load-btn" title="Load project from JSON">Load</button>
+                <button class="pixel-btn" id="export-png" title="Export as PNG (transparent)">PNG</button>
+                <button class="pixel-btn" id="export-jpg" title="Export as JPG">JPG</button>
+                <button class="pixel-btn" id="export-svg" title="Export as SVG">SVG</button>
+            </div>
+        </div>
+        <canvas id="pixel-canvas"></canvas>
+        <canvas id="preview-canvas" width="100" height="100"></canvas>
+    </div>
+    <footer>
+        <p>© 2025 Pixly. All rights reserved. Created by grok3, fixed by cursor-claude-3.7.sonnet. Designed by <a href="https://x.com/TheBlecky398" target="_blank">Blecky398</a></p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,332 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pixelify Sans', sans-serif;
+    background-color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: #222;
+    overflow-x: hidden; /* Prevent horizontal scrolling at the body level */
+}
+
+header {
+    background-color: #2a2a2a;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    border-bottom: 4px solid #000;
+}
+
+header h1 {
+    font-size: 48px;
+    text-shadow: 4px 4px 0 #000;
+}
+
+header p {
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+.container {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    max-width: 100%;
+}
+
+.controls {
+    margin-bottom: 20px;
+    background-color: #d0d0d0;
+    padding: 10px;
+    border: 4px solid #000;
+    display: inline-block;
+    position: relative;
+    max-width: 100%;
+    overflow: visible; /* Ensure tooltips are visible outside the container */
+}
+
+/* Add a wrapper for the buttons to handle scrolling without affecting tooltips */
+.controls-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    align-items: center; /* Vertically center all items */
+}
+
+label {
+    font-size: 16px;
+    margin-right: 5px;
+    display: inline-flex;
+    align-items: center;
+}
+
+input[type="number"] {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 16px;
+    padding: 4px;
+    border: 2px solid #000;
+    width: 60px;
+    background-color: #fff;
+    height: 36px; /* Match button height */
+    vertical-align: middle;
+}
+
+input[type="color"] {
+    border: 4px solid #000;
+    padding: 0;
+    width: 40px;
+    height: 36px;
+    cursor: pointer;
+    vertical-align: middle;
+    background-color: #666;
+    margin: 0 5px;
+    box-sizing: border-box;
+}
+
+/* Fix for Firefox color picker alignment */
+@-moz-document url-prefix() {
+    input[type="color"] {
+        padding: 0;
+        background-color: transparent;
+    }
+}
+
+select {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 16px;
+    padding: 8px;
+    border: 4px solid #000;
+    background-color: #fff;
+    margin: 0 5px;
+    vertical-align: middle;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 #000;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><rect x="4" y="8" width="8" height="4" fill="%23000"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 24px;
+    height: 36px; /* Match button height */
+}
+
+select:hover {
+    background-color: #e0e0e0;
+}
+
+.pixel-btn {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 16px;
+    padding: 4px 16px;
+    margin: 0 5px;
+    background-color: #737373;
+    color: #fff;
+    border: 4px solid #000;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 4px 4px 0 #000;
+    transition: all 0.1s;
+    position: relative;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pixel-btn:hover {
+    background-color: #8c8c8c;
+}
+
+.pixel-btn:hover::after {
+    content: attr(title);
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    font-size: 14px;
+    padding: 6px 10px;
+    border: 2px solid #000;
+    box-shadow: 2px 2px 0 #000;
+    z-index: 100;
+    white-space: normal;
+    max-width: 250px;
+    min-width: 100px;
+    width: max-content;
+    pointer-events: none;
+    animation: tooltipFade 0s;
+    text-transform: none;
+    text-align: center;
+    line-height: 1.2;
+    
+    /* Position tooltip directly above the button */
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-4px);
+}
+
+/* Special handling for buttons at the edges */
+.pixel-btn:first-child:hover::after {
+    left: 0;
+    transform: translateY(-4px);
+    text-align: left;
+}
+
+.pixel-btn:last-child:hover::after {
+    left: auto;
+    right: 0;
+    transform: translateY(-4px);
+    text-align: right;
+}
+
+@keyframes tooltipFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Media query for small screens */
+@media (max-width: 768px) {
+    .controls {
+        width: 100%;
+        overflow: visible;
+    }
+    
+    .controls-inner {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 10px;
+    }
+    
+    .pixel-btn {
+        margin: 0 2px;
+        padding: 4px 10px;
+        height: 36px;
+    }
+    
+    /* Disable tooltips on small screens to prevent overflow */
+    .pixel-btn:hover::after {
+        display: none;
+    }
+}
+
+/* Media query for medium screens - adjust tooltip positioning */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .pixel-btn:hover::after {
+        max-width: 180px;
+        font-size: 12px;
+        
+        /* Ensure tooltip stays within viewport */
+        left: 50%;
+        transform: translateX(-50%) translateY(-4px);
+    }
+}
+
+/* Adjust tooltip positioning to prevent horizontal scrolling */
+@media (max-width: 1200px) {
+    .pixel-btn:hover::after {
+        max-width: 200px;
+        font-size: 12px;
+    }
+}
+
+/* For very small screens, adjust tooltip positioning */
+@media (max-width: 480px) {
+    .controls {
+        padding: 10px 2px;
+    }
+    
+    .pixel-btn {
+        margin: 0 1px;
+        padding: 4px 8px;
+        font-size: 14px;
+        height: 32px;
+    }
+    
+    input[type="number"],
+    input[type="color"],
+    select {
+        height: 32px;
+    }
+}
+
+.pixel-btn:active {
+    box-shadow: 2px 2px 0 #000;
+    transform: translate(2px, 2px);
+}
+
+.pixel-btn.active {
+    background-color: #4CAF50;
+    box-shadow: 2px 2px 0 #000;
+}
+
+.zoom-btn {
+    padding: 4px 0; /* Equal padding, no horizontal stretch */
+    width: 36px; /* Fixed width to match "-" size */
+    text-align: center; /* Center the "+" and "-" */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#pixel-canvas {
+    border: 4px solid #000;
+    background-color: #fff;
+    display: block;
+    margin: 0 auto;
+    image-rendering: pixelated;
+    box-shadow: 6px 6px 0 #000;
+    cursor: default;
+}
+
+#preview-canvas {
+    border: 2px solid #000;
+    background-color: #fff;
+    display: block;
+    margin: 10px auto;
+    image-rendering: pixelated;
+}
+
+footer {
+    background-color: #2a2a2a;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    font-size: 16px;
+    border-top: 4px solid #000;
+}
+
+footer p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+footer a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive footer for small screens */
+@media (max-width: 768px) {
+    footer {
+        padding: 10px;
+    }
+    
+    footer p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    footer p {
+        font-size: 12px;
+    }
+}
